@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import useSound from "use-sound";
 
 //Ui
 import MenuBar from "./ui/menuBar.tsx";
@@ -8,6 +9,9 @@ import Settings from "./ui/settings.tsx";
 
 // Timers
 import TimerBox from "./views/timerBox.tsx";
+
+// Sound FX
+import daySFX from "../public/sounds/day.wav";
 
 function App() {
   const [currentView, setCurrentView] = useState("focus");
@@ -22,6 +26,7 @@ function App() {
   const [longBreakTime, setLongBreakTime] = useState(15);
 
   const [focusCount, setFocusCount] = useState(0);
+  const [play] = useSound(daySFX);
 
   const updateTimer = (newStartTime: number) => {
     const currentTime = Date.now();
@@ -37,6 +42,7 @@ function App() {
 
     if (tempElapsedTime <= 0) {
       setTimerOn(false);
+      play();
 
       if (
         currentView === "focus" &&
