@@ -1,6 +1,16 @@
-import { useState } from "react";
+import React from "react";
 
-const Control = ({ stopTimer, startTimer, restartTimer }) => {
+interface ControlProps {
+  stopTimer: () => void;
+  startTimer: () => void;
+  restartTimer: () => void;
+}
+
+const Control: React.FC<ControlProps> = ({
+  stopTimer,
+  startTimer,
+  restartTimer,
+}) => {
   return (
     <>
       <ul className="menu menu-horizontal m-2 mb-5 rounded-lg bg-base-200">

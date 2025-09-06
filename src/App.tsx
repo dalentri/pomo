@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 //Ui
@@ -23,7 +23,7 @@ function App() {
 
   const [focusCount, setFocusCount] = useState(0);
 
-  const updateTimer = (newStartTime) => {
+  const updateTimer = (newStartTime: number) => {
     const currentTime = Date.now();
     let tempElapsedTime = 0;
 
@@ -57,13 +57,13 @@ function App() {
         setCurrentView("long break");
       }
     } else {
-      let mins = Math.floor((tempElapsedTime / (1000 * 60)) % 60);
-      let secs = Math.floor((tempElapsedTime / 1000) % 60);
+      const mins = Math.floor((tempElapsedTime / (1000 * 60)) % 60);
+      const secs = Math.floor((tempElapsedTime / 1000) % 60);
 
-      mins = mins.toString();
-      secs = secs.toString().padStart(2, "0");
+      const stringMins = mins.toString();
+      const stringSecs = secs.toString().padStart(2, "0");
 
-      setTimer(mins + ":" + secs);
+      setTimer(stringMins + ":" + stringSecs);
     }
   };
 

@@ -1,4 +1,16 @@
-const MenuBar = ({ stopTimer, currentView, setCurrentView }) => {
+import React from "react";
+
+interface MenuBarProps {
+  stopTimer: () => void;
+  currentView: string;
+  setCurrentView: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const MenuBar: React.FC<MenuBarProps> = ({
+  stopTimer,
+  currentView,
+  setCurrentView,
+}) => {
   return (
     <>
       <div>

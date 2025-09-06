@@ -1,6 +1,16 @@
-import { useState } from "react";
+import React from "react";
 
-const Settings = ({
+// Define an interface for the component's props
+interface SettingsProps {
+  focusTime: number;
+  setFocusTime: React.Dispatch<React.SetStateAction<number>>;
+  breakTime: number;
+  setBreakTime: React.Dispatch<React.SetStateAction<number>>;
+  longBreakTime: number;
+  setLongBreakTime: React.Dispatch<React.SetStateAction<number>>;
+  restartTimer: () => void;
+}
+const Settings: React.FC<SettingsProps> = ({
   focusTime,
   setFocusTime,
   breakTime,
@@ -9,7 +19,7 @@ const Settings = ({
   setLongBreakTime,
   restartTimer,
 }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
@@ -18,7 +28,9 @@ const Settings = ({
       <button
         className="btn mt-4"
         onClick={() => {
-          document.getElementById("settings").showModal();
+          (
+            document.getElementById("settings") as HTMLDialogElement
+          )?.showModal();
           restartTimer();
         }}
       >
@@ -49,7 +61,7 @@ const Settings = ({
                   type="number"
                   placeholder="time"
                   value={focusTime}
-                  onChange={(e) => setFocusTime(e.target.value)}
+                  onChange={(e) => setFocusTime(parseInt(e.target.value))}
                   required
                 />
               </label>
@@ -59,7 +71,7 @@ const Settings = ({
                   type="number"
                   placeholder="time"
                   value={breakTime}
-                  onChange={(e) => setBreakTime(e.target.value)}
+                  onChange={(e) => setBreakTime(parseInt(e.target.value))}
                   required
                 />
               </label>
@@ -69,7 +81,7 @@ const Settings = ({
                   type="number"
                   placeholder="time"
                   value={longBreakTime}
-                  onChange={(e) => setLongBreakTime(e.target.value)}
+                  onChange={(e) => setLongBreakTime(parseInt(e.target.value))}
                   required
                 />
               </label>
