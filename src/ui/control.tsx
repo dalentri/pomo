@@ -15,11 +15,7 @@ const Control: React.FC<ControlProps> = ({
     <>
       <ul className="menu menu-horizontal m-2 mb-5 rounded-lg bg-base-200">
         <li>
-          <a
-            onClick={() => {
-              stopTimer();
-            }}
-          >
+          <a onClick={stopTimer}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

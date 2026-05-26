@@ -19,6 +19,8 @@ function App() {
   const [timerOn, setTimerOn] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [timer, setTimer] = useState("25:00");
+  const [time, setTime] = useState(0);
+  const [timerElapsed, setTimerElapsed] = useState(false);
 
   // Initial times
   const [focusTime, setFocusTime] = useState(25);
@@ -113,9 +115,12 @@ function App() {
 
   //Starts the timer
   const startTimer = () => {
-    if (!timerOn) {
+    if (!timerOn && timerElapsed == false) {
       const newStartTime = Date.now();
       setStartTime(newStartTime);
+      setTimerOn(true);
+      setTimerElapsed(true);
+    } else if (!timerOn && timerElapsed == true) {
       setTimerOn(true);
     }
   };
@@ -129,6 +134,7 @@ function App() {
 
   const restartTimer = () => {
     setTimerOn(false);
+    setTimerElapsed(false);
 
     if (currentView === "focus") {
       const initialTime = focusTime.toString() + ":00";
