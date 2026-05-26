@@ -79,12 +79,15 @@ function App() {
     if (currentView === "focus") {
       const initialTime = focusTime.toString() + ":00";
       setTimer(initialTime);
+      setTimerElapsed(false);
     } else if (currentView === "break") {
       const initialTime = breakTime.toString() + ":00";
       setTimer(initialTime);
+      setTimerElapsed(false);
     } else if (currentView === "long break") {
       const initialTime = longBreakTime.toString() + ":00";
       setTimer(initialTime);
+      setTimerElapsed(false);
     }
   }, [currentView, focusTime, breakTime, longBreakTime]);
 
