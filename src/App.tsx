@@ -19,7 +19,6 @@ function App() {
   const [timerOn, setTimerOn] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [timer, setTimer] = useState("25:00");
-  const [time, setTime] = useState(0);
   const [timerElapsed, setTimerElapsed] = useState(false);
 
   // Initial times
