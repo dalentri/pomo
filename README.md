@@ -1,12 +1,12 @@
-# Pomo
+# Pomo 🍅
 
 pomo is a pomodoro timer that allows you to set designated focus and break times.
 
 ## Features
 
-- Start, pause, and reset pomodoro timers
-- Focus counter for tracking amount of focus sessions
-- Custom focus, break, and long break times
+- Start, pause, and reset pomodoro timers ⏲️
+- Focus counter for tracking amount of focus sessions 📚
+- Custom focus, break, and long break times 🕰️
 
 ## Development
 
