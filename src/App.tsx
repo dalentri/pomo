@@ -20,6 +20,7 @@ function App() {
   const [startTime, setStartTime] = useState(0);
   const [timer, setTimer] = useState("25:00");
   const [timerElapsed, setTimerElapsed] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(0);
 
   // Initial times
   const [focusTime, setFocusTime] = useState(25);
@@ -30,16 +31,7 @@ function App() {
   const [play] = useSound(daySFX);
 
   const updateTimer = (newStartTime: number) => {
-    const currentTime = Date.now();
-    let tempElapsedTime = 0;
-
-    if (currentView === "focus") {
-      tempElapsedTime = newStartTime + focusTime * 60000 - currentTime;
-    } else if (currentView === "break") {
-      tempElapsedTime = newStartTime + breakTime * 60000 - currentTime;
-    } else if (currentView === "long break") {
-      tempElapsedTime = newStartTime + longBreakTime * 60000 - currentTime;
-    }
+    let tempElapsedTime = newStartTime - Date.now();
 
     if (tempElapsedTime <= 0) {
       setTimerOn(false);
@@ -50,9 +42,11 @@ function App() {
         (focusCount === 0 || focusCount % 3 !== 0)
       ) {
         setCurrentView("break");
+        setTimerElapsed(false);
         setFocusCount((prev) => prev + 1);
       } else if (currentView === "break") {
         setCurrentView("focus");
+        setTimerElapsed(false);
       } else if (currentView === "long break") {
         setCurrentView("focus");
       } else if (
@@ -61,6 +55,7 @@ function App() {
         focusCount % 3 === 0
       ) {
         setFocusCount((prev) => prev + 1);
+        setTimerElapsed(false);
         setCurrentView("long break");
       }
     } else {
@@ -118,12 +113,18 @@ function App() {
   //Starts the timer
   const startTimer = () => {
     if (!timerOn && timerElapsed == false) {
-      const newStartTime = Date.now();
-      setStartTime(newStartTime);
+      if (currentView == "focus") {
+        setStartTime(Date.now() + focusTime * 60000);
+      } else if (currentView == "break") {
+        setStartTime(Date.now() + breakTime * 60000);
+      } else if (currentView == "long break") {
+        setStartTime(Date.now() + longBreakTime * 60000);
+      }
       setTimerOn(true);
       setTimerElapsed(true);
     } else if (!timerOn && timerElapsed == true) {
       setTimerOn(true);
+      setStartTime(Date.now() + timeRemaining);
     }
   };
 
@@ -131,6 +132,11 @@ function App() {
   const stopTimer = () => {
     if (timerOn) {
       setTimerOn(false);
+      const [min, sec] = timer.split(":");
+      const minutes = parseInt(min);
+      const seconds = parseInt(sec);
+      let time = minutes * 60000 + seconds * 1000;
+      setTimeRemaining(time);
     }
   };
 
